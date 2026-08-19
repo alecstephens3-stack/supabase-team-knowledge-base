@@ -1,0 +1,13 @@
+{
+  "name": "supabase-team-knowledge-base",
+  "version": "1.0.0",
+  "description": "A Supabase pattern for an internal knowledge base everyone reads and only named people can edit.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test 'tests/*.test.mjs'"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "jsdom": "^25.0.1"
+  }
+}
