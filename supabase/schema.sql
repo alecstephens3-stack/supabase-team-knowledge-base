@@ -273,6 +273,14 @@ alter table public.editors        enable row level security;
 alter table public.page_revisions enable row level security;
 alter table public.heartbeat      enable row level security;
 
+-- Data API access, granted explicitly. Supabase stopped granting it automatically for new
+-- tables in public (new projects already; existing ones from 2026-10-30). Without these lines
+-- a fresh project gets every table and then "permission denied" from the app. This is exactly
+-- what Supabase used to grant; the row level security above still decides who sees what.
+grant usage on schema public to anon, authenticated, service_role;
+grant all on all tables in schema public to anon, authenticated, service_role;
+grant all on all sequences in schema public to anon, authenticated, service_role;
+
 drop policy if exists read_sections on public.sections;
 create policy read_sections on public.sections for select to authenticated using (public.is_member());
 
